@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import child_process from "node:child_process";
 import express from "express";
 import rateLimit from "express-rate-limit";
-import './keep_alive.js'; // Replace the require line with this
 
 process.loadEnvFile()
 const {
@@ -470,9 +469,11 @@ app.post("/", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  return res.send(
-    `<meta http-equiv="Refresh" content="0; URL=https://t.me/${app.locals.botName ?? ""}">`,
-  );
+  if (req.path === '/ping') {
+    return res.status(200).send("I'm alive");
+  }
+  
+  return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
 });
 
 app.listen(PORT, "0.0.0.0", () => console.log(`server listening on port ${PORT}`));
