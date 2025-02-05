@@ -16,6 +16,9 @@ const {
 } = process.env;
 
 
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
 
 const TELEGRAM_API = "https://api.telegram.org";
 
@@ -454,8 +457,30 @@ const groupMessageHandler = async (message) => {
   });
 };
 
+app.get("/", (req, res) => {
+  if (req.path === '/ping') {
+    return res.status(200).send("I'm alive");
+  }
+  
+  return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
+});
+
 app.post("/", async (req, res) => {
+  console.log("Full Webhook Payload:", JSON.stringify(req.body, null, 2));
+  
   const message = req.body?.message;
+  
+  if (!message) {
+    console.error("No message in payload");
+    return res.sendStatus(400);
+  }
+
+  console.log("Message Details:", {
+    chatType: message.chat?.type,
+    text: message.text,
+    botMentioned: messageIsMentioningBot(message)
+  });
+
   if (message?.chat?.type === "private") {
     await privateMessageHandler(message);
     setMessageReaction(message.chat.id, message.message_id, []);
@@ -466,14 +491,6 @@ app.post("/", async (req, res) => {
     }
   }
   res.sendStatus(204);
-});
-
-app.get("/", (req, res) => {
-  if (req.path === '/ping') {
-    return res.status(200).send("I'm alive");
-  }
-  
-  return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
 });
 
 app.listen(PORT, "0.0.0.0", () => console.log(`server listening on port ${PORT}`));
