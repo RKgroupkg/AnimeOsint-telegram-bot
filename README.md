@@ -8,9 +8,9 @@
 
 This Telegram Bot can tell the anime when you send an screenshot to it
 
-https://telegram.me/WhatAnimeBot
+https://t.me/AnimeOsint_rkbot
 
-
+https://raw.githubusercontent.com/RKgroupkg/AnimeOsint-telegram-bot/refs/heads/master/Assets/images%20(10).jpeg
 
 ## Features
 
