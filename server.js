@@ -458,11 +458,13 @@ const groupMessageHandler = async (message) => {
 };
 
 app.get("/ping", (req, res) => {
-  return res.status(200).send("I'm alive");
+ console.log(`Ping received at ${new Date().toISOString()} from IP: ${req.ip}`);
+ return res.status(200).send("I'm alive");
 });
 
 app.get("/", (req, res) => {
-  return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
+ console.log(`Root URL accessed at ${new Date().toISOString()} from IP: ${req.ip}`);
+ return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
 });
 
 app.post("/", async (req, res) => {
