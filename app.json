@@ -1,7 +1,7 @@
 {
-  "name": "trace.moe-telegram-bot",
+  "name": "TeleOsint",
   "description": "This Telegram Bot can tell the anime when you send an screenshot to it",
-  "repository": "https://github.com/soruly/trace.moe-telegram-bot",
+  "repository": "https://github.com/RKgroupkg/AnimeOsint-telegram-bot",
   "logo": "https://trace.moe/favicon128.png",
   "keywords": ["telegram", "trace.moe", "anime"],
   "env": {
