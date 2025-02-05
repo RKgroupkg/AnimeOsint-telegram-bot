@@ -457,11 +457,11 @@ const groupMessageHandler = async (message) => {
   });
 };
 
+app.get("/ping", (req, res) => {
+  return res.status(200).send("I'm alive");
+});
+
 app.get("/", (req, res) => {
-  if (req.path === '/' && req.query.ping !== undefined) {
-    return res.status(200).send("I'm alive");
-  }
-  
   return res.redirect(`https://t.me/${app.locals.botName ?? ""}`);
 });
 
