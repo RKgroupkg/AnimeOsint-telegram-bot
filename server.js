@@ -200,11 +200,11 @@ const submitSearch = (imageFileURL, opts) =>
         TRACE_MOE_KEY ? { headers: { "x-trace-key": TRACE_MOE_KEY } } : {},
       ).catch((e) => {
         trial = 0;
-        return resolve({ text: "`trace.moe API error, please try again later.`" });
+        return resolve({ text: "`Osint API error, please try again later.`" });
       });
       if (!response) {
         trial = 0;
-        return resolve({ text: "`trace.moe API error, please try again later.`" });
+        return resolve({ text: "`Osint API error, please try again later.`" });
       }
       if (response.status === 503 || response.status === 402) {
         await new Promise((resolve) =>
@@ -214,13 +214,13 @@ const submitSearch = (imageFileURL, opts) =>
     }
 
     if ([502, 503, 504].includes(response.status)) {
-      return resolve({ text: "`trace.moe server is busy, please try again later.`" });
+      return resolve({ text: "`Osint server is busy, please try again later.`" });
     }
     if (response.status === 402 || response.status === 429) {
       return resolve({ text: "`You exceeded the search limit, please try again later`" });
     }
     if (response.status >= 400) {
-      return resolve({ text: "`trace.moe API error, please try again later.`" });
+      return resolve({ text: "`Osint API error, please try again later.`" });
     }
     const searchResult = await response.json();
     if (response.status >= 400 || searchResult.error) {
@@ -231,7 +231,7 @@ const submitSearch = (imageFileURL, opts) =>
       });
     }
     if (searchResult?.result?.length <= 0) {
-      return resolve({ text: "Cannot find any results from trace.moe" });
+      return resolve({ text: "Cannot find any results from my data." });
     }
     const { anilist, similarity, filename, from, to, video } = searchResult.result[0];
     const { title: { chinese, english, native, romaji } = {}, isAdult } =
@@ -348,7 +348,14 @@ const privateMessageHandler = async (message) => {
         parse_mode: "Markdown",
       });
     }
-    return await sendMessage(message.chat.id, "You can Send / Forward anime screenshots to me.");
+    return await sendMessage(message.chat.id, "Yᴏᴜ ᴄᴀɴ Sᴇɴᴅ / Fᴏʀᴡᴀʀᴅ ᴀɴɪᴍᴇ sᴄʀᴇᴇɴsʜᴏᴛs ᴛᴏ ᴍᴇ.", {
+  reply_markup: {
+    inline_keyboard: [
+      [{ text: "𝖢𝗁𝖺𝗇𝗇𝖾𝗅", url: "https://t.me/Rkgroup_Bot" }],
+      [{ text: "𝖲𝗎𝗉𝗉𝗈𝗋𝗍/𝗁𝖾𝗅𝗉", url: "https://t.me/Rkgroup_helpbot?start=start" }]
+    ],
+  },
+});
   }
   setMessageReaction(message.chat.id, message.message_id, ["👌"]);
   const result = await submitSearch(imageURL, searchOpts);
@@ -382,15 +389,32 @@ const groupMessageHandler = async (message) => {
     if (responding_msg.text?.toLowerCase().includes("/help")) {
       return await sendMessage(message.chat.id, getHelpMessage(app.locals.botName), {
         reply_to_message_id: message.message_id,
-        parse_mode: "Markdown",
+        parse_mode: "Markdown",reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "𝖢𝗁𝖺𝗇𝗇𝖾𝗅", url: "https://t.me/Rkgroup_Bot" },
+          { text: "𝖲𝗎𝗉𝗉𝗈𝗋𝗍/𝗁𝖾𝗅𝗉", url: "https://t.me/Rkgroup_helpbot?start=start" }
+        ]
+      ],
+    },
       });
     }
     // cannot find image from the message mentioning the bot
     return await sendMessage(
-      message.chat.id,
-      "Mention me in an anime screenshot, I will tell you what anime is that",
-      { reply_to_message_id: message.message_id },
-    );
+   message.chat.id,
+   "Yᴏᴜ ᴄᴀɴ Sᴇɴᴅ / Fᴏʀᴡᴀʀᴅ ᴀɴɪᴍᴇ sᴄʀᴇᴇɴsʜᴏᴛs ᴛᴏ ᴍᴇ.",
+   {
+    reply_to_message_id: message.message_id,
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "𝖢𝗁𝖺𝗇𝗇𝖾𝗅", url: "https://t.me/Rkgroup_Bot" },
+          { text: "𝖲𝗎𝗉𝗉𝗈𝗋𝗍/𝗁𝖾𝗅𝗉", url: "https://t.me/Rkgroup_helpbot?start=start" }
+        ]
+      ],
+    },
+  }
+);
   }
   setMessageReaction(message.chat.id, message.message_id, ["👌"]);
   const result = await submitSearch(imageURL, searchOpts);
