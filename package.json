@@ -17,16 +17,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/soruly/trace.moe-telegram-bot.git"
+    "url": "git+https://github.com/RKgroupkg/AnimeOsint-telegram-bot"
   },
-  "author": "soruly",
+  "author": "Rkgroup",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/soruly/trace.moe-telegram-bot/issues"
+    "url": "https://github.com/RKgroupkg/AnimeOsint-telegram-bot/issues"
   },
-  "homepage": "https://github.com/soruly/trace.moe-telegram-bot",
+  "homepage": "https://github.com/RKgroupkg/AnimeOsint-telegram-bot",
   "dependencies": {
     "express": "^5.0.1",
+    "dotenv": "^16.3.1",
     "express-rate-limit": "^7.5.0"
   },
   "devDependencies": {
