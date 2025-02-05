@@ -4,9 +4,6 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import './keep_alive.js'; // Replace the require line with this
 
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 const {
   PORT = 3000,
