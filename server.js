@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import child_process from "node:child_process";
 import express from "express";
 import rateLimit from "express-rate-limit";
+const keep_alive = require('./keep_alive.js'); // Import keep_alive.js
+
 
 process.loadEnvFile();
 const {
@@ -14,6 +16,11 @@ const {
   RAILWAY_GIT_COMMIT_SHA,
   HEROKU_SLUG_COMMIT,
 } = process.env;
+
+// Define the root route
+app.get('/', async (request, reply) => {
+    reply.send({ message: "Bot is running!" });
+});
 
 const TELEGRAM_API = "https://api.telegram.org";
 
