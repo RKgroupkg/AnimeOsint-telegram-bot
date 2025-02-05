@@ -5,7 +5,7 @@ RUN apk add --no-cache tini
 ENTRYPOINT ["/sbin/tini", "--"]
 ENV NODE_ENV=production
 WORKDIR /app
-COPY [".env","keep_alive.js","package.json", "package-lock.json*", "./"]
+COPY ["keep_alive.js","package.json", "package-lock.json*", "./"]
 RUN npm install --omit=dev
 COPY server.js ./
 CMD [ "node", "server.js" ]
