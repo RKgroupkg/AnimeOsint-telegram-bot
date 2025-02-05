@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 
 // process.loadEnvFile()
 const {
-  PORT = 3000,
+  PORT = 8080,
   TELEGRAM_TOKEN,
   TELEGRAM_WEBHOOK,
   TRACE_MOE_KEY,
