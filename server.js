@@ -474,7 +474,5 @@ app.get("/", (req, res) => {
     `<meta http-equiv="Refresh" content="0; URL=https://t.me/${app.locals.botName ?? ""}">`,
   );
 });
-app.get('/ping', async (request, reply) => {
-    reply.send({ message: "Bot is running!" });
-});
+
 app.listen(PORT, "0.0.0.0", () => console.log(`server listening on port ${PORT}`));
