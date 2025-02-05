@@ -459,7 +459,7 @@ const groupMessageHandler = async (message) => {
 
 app.get("/ping", (req, res) => {
  console.log(`Ping received at ${new Date().toISOString()} from IP: ${req.ip}`);
- return res.status(200).send("I'm alive");
+ return res.status(200).send("I'm alive🤖");
 });
 
 app.get("/", (req, res) => {
