@@ -18,9 +18,6 @@ const {
   HEROKU_SLUG_COMMIT,
 } = process.env;
 
-const TELEGRAM_API = "https://api.telegram.org";
-
-// ... rest of your bot code ...
 
 
 const TELEGRAM_API = "https://api.telegram.org";
