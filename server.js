@@ -2,8 +2,7 @@ import fs from "node:fs/promises";
 import child_process from "node:child_process";
 import express from "express";
 import rateLimit from "express-rate-limit";
-
-import keep_alive from './keep_alive.js';
+import './keep_alive.js'; // Replace the require line with this
 
 process.loadEnvFile();
 const {
