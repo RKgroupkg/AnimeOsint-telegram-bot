@@ -4,7 +4,9 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import './keep_alive.js'; // Replace the require line with this
 
-process.loadEnvFile();
+import * as dotenv from 'dotenv';
+require('dotenv').config();
+
 const {
   PORT = 3000,
   TELEGRAM_TOKEN,
@@ -16,6 +18,9 @@ const {
   HEROKU_SLUG_COMMIT,
 } = process.env;
 
+const TELEGRAM_API = "https://api.telegram.org";
+
+// ... rest of your bot code ...
 
 
 const TELEGRAM_API = "https://api.telegram.org";
