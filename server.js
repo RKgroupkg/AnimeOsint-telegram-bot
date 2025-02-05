@@ -458,7 +458,7 @@ const groupMessageHandler = async (message) => {
 };
 
 app.get("/", (req, res) => {
-  if (req.path === '/ping') {
+  if (req.path === '/' && req.query.ping !== undefined) {
     return res.status(200).send("I'm alive");
   }
   
