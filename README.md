@@ -5,8 +5,10 @@
 [![Docker](https://img.shields.io/docker/pulls/soruly/trace.moe-telegram-bot?style=flat-square)](https://hub.docker.com/r/soruly/trace.moe-telegram-bot)
 [![Docker Image Size](https://img.shields.io/docker/image-size/soruly/trace.moe-telegram-bot/latest?style=flat-square)](https://hub.docker.com/r/soruly/trace.moe-telegram-bot)
 
-[![Telegram](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)](https://telegram.me/WhatAnimeBot)
+[![Telegram](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)](https://telegram.me/AnimeOsint_rkbot)
 ![Maintained](https://img.shields.io/badge/Maintained-yes-green.svg)
+
+
 This Telegram Bot can tell the anime when you send an screenshot to it
 
 
@@ -22,7 +24,7 @@ This Telegram Bot can tell the anime when you send an screenshot to it
 
 ## How to use
 
-1. Start chatting with the bot [![Telegram](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)](https://telegram.me/WhatAnimeBot)
+1. Start chatting with the bot [![Telegram](https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg)](https://telegram.me/AnimeOsint_rkbot)
 3. Send anime screenshots (images, gif or video) directly to the bot
 4. You may also forward images from other chats to the bot
 5. The bot will tell you the anime, episode, and time code of it
