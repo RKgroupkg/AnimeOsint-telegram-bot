@@ -16,10 +16,7 @@ const {
   HEROKU_SLUG_COMMIT,
 } = process.env;
 
-// Define the root route
-app.get('/', async (request, reply) => {
-    reply.send({ message: "Bot is running!" });
-});
+
 
 const TELEGRAM_API = "https://api.telegram.org";
 
@@ -477,5 +474,7 @@ app.get("/", (req, res) => {
     `<meta http-equiv="Refresh" content="0; URL=https://t.me/${app.locals.botName ?? ""}">`,
   );
 });
-
+app.get('/', async (request, reply) => {
+    reply.send({ message: "Bot is running!" });
+});
 app.listen(PORT, "0.0.0.0", () => console.log(`server listening on port ${PORT}`));
