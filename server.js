@@ -5,7 +5,6 @@ import rateLimit from "express-rate-limit";
 
 // process.loadEnvFile()
 const {
-  PORT = 1000,
   TELEGRAM_TOKEN,
   TELEGRAM_WEBHOOK,
   TRACE_MOE_KEY,
@@ -23,7 +22,7 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 const TELEGRAM_API = "https://api.telegram.org";
-
+const PORT = 8443;
 let WEBHOOK;
 
 if (RENDER) {
