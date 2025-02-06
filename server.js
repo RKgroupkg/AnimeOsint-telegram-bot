@@ -5,7 +5,7 @@ import rateLimit from "express-rate-limit";
 
 // process.loadEnvFile()
 const {
-  PORT = 8080,
+  PORT = 1000,
   TELEGRAM_TOKEN,
   TELEGRAM_WEBHOOK,
   TRACE_MOE_KEY,
@@ -27,7 +27,7 @@ const TELEGRAM_API = "https://api.telegram.org";
 let WEBHOOK;
 
 if (RENDER) {
-    WEBHOOK = RENDER_EXTERNAL_URL;
+    WEBHOOK = `${RENDER_EXTERNAL_URL}:${PORT}`;
     console.log("Using Render Webhook:", WEBHOOK);
 } else {
     WEBHOOK = TELEGRAM_WEBHOOK;
