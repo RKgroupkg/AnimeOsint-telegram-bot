@@ -10,7 +10,9 @@ const {
   TELEGRAM_WEBHOOK,
   TRACE_MOE_KEY,
   ANILIST_API_URL = "https://graphql.anilist.co/",
-  RAILWAY_STATIC_URL,
+  RENDER_EXTERNAL_URL,
+  RENDER,
+  RENDER_INSTANCE_ID,
   RAILWAY_GIT_COMMIT_SHA,
   HEROKU_SLUG_COMMIT,
 } = process.env;
@@ -22,7 +24,17 @@ process.on('unhandledRejection', (reason, promise) => {
 
 const TELEGRAM_API = "https://api.telegram.org";
 
-const WEBHOOK = RAILWAY_STATIC_URL ? `https://${RAILWAY_STATIC_URL}` : TELEGRAM_WEBHOOK;
+let WEBHOOK;
+
+if (RENDER) {
+    WEBHOOK = RENDER_EXTERNAL_URL;
+    console.log("Using Render Webhook:", WEBHOOK);
+} else {
+    WEBHOOK = TELEGRAM_WEBHOOK;
+    console.log("Using Telegram Webhook:", WEBHOOK);
+}
+
+console.log("Final Webhook URL:", WEBHOOK);
 
 if (!TELEGRAM_TOKEN || !WEBHOOK) {
   console.log("Please configure TELEGRAM_TOKEN and TELEGRAM_WEBHOOK first");
@@ -51,10 +63,8 @@ const app = express();
 
 let REVISION;
 try {
-  REVISION =
-    HEROKU_SLUG_COMMIT ??
-    RAILWAY_GIT_COMMIT_SHA ??
-    child_process.execSync("git rev-parse HEAD").toString().trim();
+  REVISION = RENDER_INSTANCE_ID
+    
 } catch (e) {
   REVISION = "";
 }
@@ -83,20 +93,23 @@ app.use(
 app.use(express.json());
 
 // app.use((req, res, next) => {
-//   const startTime = performance.now();
-//   console.log("=>", new Date().toISOString(), req.ip, req.path);
-//   res.on("finish", () => {
-//     console.log(
-//       "<=",
-//       new Date().toISOString(),
-//       req.ip,
-//       req.path,
-//       res.statusCode,
-//       `${(performance.now() - startTime).toFixed(0)}ms`
-//     );
-//   });
-//   next();
-// });
+app.use((req, res, next) => {
+  const startTime = performance.now();
+  console.log("=>", new Date().toISOString(), req.ip, req.path);
+
+  res.on("finish", () => {
+    console.log(
+      "<=",
+      new Date().toISOString(),
+      req.ip,
+      req.path,
+      res.statusCode,
+      `${(performance.now() - startTime).toFixed(0)}ms`
+    );
+  });
+
+  next();
+});
 
 const sendMessage = (chat_id, text, options) =>
   fetch(`${TELEGRAM_API}/bot${TELEGRAM_TOKEN}/sendMessage`, {
